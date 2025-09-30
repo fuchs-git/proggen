@@ -1,0 +1,60 @@
+Wrap Up
+BS-Kategorien
+Ressourcen
+	zeitlich / räumlich
+
+Schichtsysteme erläutern
+Skalierbarkeit
+	RAM 32 Bit  und 4GB
+
+Konstruktionsprinzipien
+	Programme brechen das Schichtenprinzip, warum? -> Performence -> Folgerung nicht mehr portabel
+
+Protected Mode
+	Wann darf was auf Systemressourcen zugreifen?
+	Welches Programm wird mit dem Usermode gestartet?
+	Welcher Teil vom BS gehört zum Kernel? ( Prozesswechsel / Dispatching, virtuelle Speicherverwaltung, InterProzessCommunication IPC)
+
+Betriebssystemarchitekturen
+	Monolitisch (Linux)
+	Mikrokernel (Minix, Intel Management Engine )
+	Hybridkernel (Windows /Apple)
+
+Interruptsteuerung
+	Polling
+	Interruptsteuerung ((Befehlszyklus wird erweitert) Fetch,Decode,Execute, IRQ
+	IRQ- Controller Programmierbar
+	Normaler Interrupt 0-7  und 8-15
+	Heute heißen die APIC, weil die auf einzelne CPU's zugreifen können und vieles mehr
+Interrup-Bearbeitung
+	genauer Ablauf
+	Exeptions
+	EAX / SystemCall Tabelle (mov eax, 5)
+
+	Beipiele:
+	Externe HW löst einen Interrupt aus, wie kommt der Treiber in die Interrupt-Routine
+	Software möchte auf eine Datei Zugreifen (Software löst einen Interrupt aus) !SYSTEM-CALL: Open File from Harddisk!!
+
+	Synchrone und nicht synchrone Interrupts (Programmablauf vs Tasteneinschlag)
+
+Multiprogrammierung
+	Strukturen (Prozesstabelle / Prozesskontrollblock
+	Prozesslebenszyklus (einfacher Lebenszyklus mit ready-pool und blocked-pool) (Letzter Schritt: Aufräumvorgang -> Prozesstabelle wird geleert, danach ist der Prozess wirklich beendet)
+		pro Prozess einen Virtuellen Prozess
+
+Spaelverarbeitung / RoundRobin
+	Verfahren kennen SJF, FCFS, SRTF,... und anwenden können.
+	Vor und Nachteile kennen
+
+Thread
+	Prozess Kontext
+		Was ist responsive?
+		Wie sieht das aus CPU Sicht aus?
+		Was ist ein MMU Register?
+	Beispiel Webserver: einen Thread um Anfragen von Nutzern entgegenzunehmen, und multiple Worker Threads um die Anfragen zu bearbeiten
+	Threads sind "light-way" Prozesse
+	Was sind die Thread Spezifischen Teile beim Prozess-Kontext
+
+Moorsche- Parkinson Gesetz
+	Wie designen wir ein BS um zukunftsicher zu sein? die Gesetze helfen bei der Spekulation von Hardware entwicklungen in den nächsten x-Jahren
+

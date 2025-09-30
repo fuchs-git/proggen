@@ -1,0 +1,113 @@
+Heartbleed
+Shellshock
+Spectre
+Meltdown
+BlueKeep
+EternalBlue
+KRACK
+Log4Shell
+Dirty COW
+WannaCry
+BadUSB
+Rowhammer
+Stuxnet
+NotPetya
+Apache Struts
+Sandworm
+Petya
+DarkHotel
+Equation Group
+SolarWinds
+ProxyShell
+ProxyLogon
+Ryuk
+REvil
+Ghost RAT
+Hafnium
+Carbanak
+Turla
+Cobalt Strike
+Sodinokibi
+BlackEnergy
+LuckyMouse
+FIN7
+Wizard Spider
+Maze
+CoseyBear
+APT29
+APT28
+FinFisher
+Operation Aurora
+Shamoon
+DarkSide
+NetWalker
+Ke3chang
+LockBit
+Black Basta
+Clop
+Egregor
+Fancy Bear
+Cozy Bear
+The Dukes
+Flame
+Operation Olympic Games
+Red October
+Charming Kitten
+Night Dragon
+Conficker
+Titan Rain
+Cloud Atlas
+Emotet
+TrickBot
+Dridex
+Mirai
+Zeus
+GoldenEye
+Bashlite
+QakBot
+HermeticWiper
+BlackCat
+KillNet
+Icefog
+Snake
+Machete
+Energetic Bear
+Dragonfly
+Deep Panda
+APT10
+Operation CuckooBees
+Windigo
+Nightmare
+IcedID
+Industroyer
+Pegasus
+Silver Sparrow
+FinSpy
+Operation Ghostwriter
+APT40
+Operation Blockbuster
+APT12
+Operation Cleaver
+EquationLaser
+EquationDrug
+Operation Aurora
+FSBwIT
+Reliefpfeiler
+Affe
+Anna
+Eine güldne, gute Tugend: Lüge nie!
+Was it a car or a cat I saw?
+because
+Annastasia
+Banana
+Montana
+Tropicana
+Americana
+Techniker
+Tech
+Nik
+ICHBINDER
+ICH
+BIN
+DER
+BINDER

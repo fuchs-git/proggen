@@ -1,0 +1,17 @@
+Name,Alter,Beruf/Eigenschaft
+Papa Schlumpf,542,Anführer
+Schlumpfine,100,Blumenzüchterin
+Schlaubi,150,Wissenschafter
+Hefty,120,Sportler
+Clumsy,135,Tollpatsch
+Gargamel,unknown,Bösewicht
+Handy,110,Erfinder
+Bäcker,130,Bäcker
+Schlafmütz,90,Schläfer
+Maler,115,Künstler
+Bauer,125,Bauer
+Musiker,85,Musiker
+Jokey,95,Scherzkeks
+Baby Schlumpf,5,Baby
+Großmaul,105,Großmaul
+Toulous,75,Koch

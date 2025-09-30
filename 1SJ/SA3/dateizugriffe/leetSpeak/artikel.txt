@@ -1,0 +1,10 @@
+Samsung: Android-Smartphones speichern auch Passwörter zwischen
+Die Samsung-Tastatur auf Samsung-Smartphones listet im Verlauf auch alte kopierte Passwörter. Der Hersteller prüft mögliche Änderungen.
+
+Samsungs Android-Smartphones speichern in der Zwischenablage kopierte Inhalte. Im Zwischenablageverlauf finden sich
+gelegentlich auch alte, kopierte Passwörter. Samsung evaluiert das Problem derzeit.
+
+Inzwischen macht der Fall eines besorgten Samsung-Nutzers in den Medien die Runde – das grundlegende Problem ist jedoch
+schon seit Jahren vorhanden. Wir haben kürzlich auch einen Leserhinweis mit dieser Beobachtung erhalten und können das
+nachvollziehen: Etwa im Verlauf des Samsung-Android-Keyboards tauchen auch Passwörter auf, die beispielsweise aus einem
+Passwort-Manager kopiert wurden.
