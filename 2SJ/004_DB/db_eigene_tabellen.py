@@ -1,5 +1,6 @@
 import psycopg
 
+db_conn: psycopg.Connection # type hint für PyCharm
 try:
     with psycopg.connect(dbname="postgres",
                          user="postgres",
