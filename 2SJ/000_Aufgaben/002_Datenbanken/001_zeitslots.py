@@ -26,7 +26,8 @@ try:
 
         with db_conn.cursor() as cursor:
             try:
-                cursor.execute('DROP TABLE zeitslot;')
+                cursor.execute("DROP TABLE IF EXISTS person_zeitslot;")
+                cursor.execute("DROP TABLE IF EXISTS zeitslot;")
             except psycopg.errors.UndefinedTable:
                 print('Tabelle Zeitslots wird neu angelegt.')
 

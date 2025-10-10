@@ -33,8 +33,8 @@ try:
             cursor.execute('''
                            CREATE TABLE person_zeitslot
                            (
-                               person_id   INTEGER NOT NULL REFERENCES person (id),
-                               zeitslot_id INTEGER NOT NULL REFERENCES zeitslot (id),
+                               person_id   INTEGER NOT NULL REFERENCES person (id) ON DELETE CASCADE,
+                               zeitslot_id INTEGER NOT NULL REFERENCES zeitslot (id) ON DELETE CASCADE,
                                PRIMARY KEY (person_id, zeitslot_id)
                            );
                            ''')
