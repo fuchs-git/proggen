@@ -5,6 +5,7 @@ ersten Schritt die Datenbank mit dem Namen prg_filmdatenbank an.
 '''
 
 import psycopg
+import filmDB_Inhalt
 
 db_conn: psycopg.Connection  # type hint für PyCharm
 # ---------------------------------------------------------------------------------------------------------------------
@@ -41,7 +42,7 @@ try:
                          port="5432",
                          autocommit=True) as db_conn:
         # -------------------------------------------------------------------------------------------------------------
-        # Datenbank erstellen
+        # Tabellen erstellen
         # -------------------------------------------------------------------------------------------------------------
 
         with db_conn.cursor() as cursor:
@@ -73,6 +74,12 @@ try:
                         PRIMARY KEY (fk_filme_id, fk_person_id)
                     );
             ''')
+        # -------------------------------------------------------------------------------------------------------------
+        # Tabellen befüllen
+        # -------------------------------------------------------------------------------------------------------------
+                cursor.executemany("INSERT INTO person (nachname, vorname, geburtstag) VALUES (%s,%s,%s)", filmDB_Inhalt.personen_liste)
+                cursor.executemany("INSERT INTO film(titel, erscheinungsjahr, fk_regie) VALUES  (%s, %s, (SELECT person_id FROM person WHERE nachname = %s))", filmDB_Inhalt.filme_liste)
+                cursor.executemany("INSERT INTO hat_mitgespielt_in(fk_filme_id, fk_person_id, rolle) VALUES ((SELECT film_id FROM film WHERE titel LIKE %s), (SELECT person_id FROM person WHERE nachname = %s),%s)", filmDB_Inhalt.rollen_liste)
 
 except psycopg.DatabaseError as e:
     print(e, type(e))
