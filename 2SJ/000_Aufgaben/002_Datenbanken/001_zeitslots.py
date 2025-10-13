@@ -50,7 +50,7 @@ try:
                     start = f'{stunden:02d}:00'
                     ende = f'{stunden + 2:02d}:00'
                     slots.append((wtag, start, ende))
-                cursor.executemany('INSERT INTO zeitslot(wochentag, startzeit, endzeit) VALUES (%s, %s, %s)', slots)
-
+            cursor.executemany('INSERT INTO zeitslot(wochentag, startzeit, endzeit) VALUES (%s, %s, %s)', slots)
+            # print(cursor.rowcount)
 except psycopg.DataError as e:
     print(e, type(e))
