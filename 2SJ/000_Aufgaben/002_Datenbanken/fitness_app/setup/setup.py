@@ -47,12 +47,6 @@ try:
 
         # -------------------------------------------------------------------------------------------------------------
 
-            try:
-                cursor.execute("DROP TABLE IF EXISTS person_zeitslot;")
-                cursor.execute("DROP TABLE IF EXISTS zeitslot;")
-            except psycopg.errors.UndefinedTable:
-                print('Tabelle Zeitslots wird neu angelegt.')
-
             cursor.execute('''
                            CREATE TABLE zeitslot (
                                id        INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -66,16 +60,13 @@ try:
 
         # -------------------------------------------------------------------------------------------------------------
 
-            try:
-                cursor.execute('DROP TABLE person_zeitslot;')
-            except psycopg.errors.UndefinedTable:
-                cursor.execute('''
-                               CREATE TABLE person_zeitslot (
-                                   person_id   INTEGER NOT NULL REFERENCES person (id) ON DELETE CASCADE,
-                                   zeitslot_id INTEGER NOT NULL REFERENCES zeitslot (id) ON DELETE CASCADE,
-                                   PRIMARY KEY (person_id, zeitslot_id)
-                               );
-                               ''')
+            cursor.execute('''
+                           CREATE TABLE person_zeitslot (
+                               person_id   INTEGER NOT NULL REFERENCES person (id) ON DELETE CASCADE,
+                               zeitslot_id INTEGER NOT NULL REFERENCES zeitslot (id) ON DELETE CASCADE,
+                               PRIMARY KEY (person_id, zeitslot_id)
+                           );
+                           ''')
             print('===> Tabelle "person_zeitslot" wurde erzeugt')
 
         # -------------------------------------------------------------------------------------------------------------
@@ -101,7 +92,7 @@ try:
                         slots.append((wtag, start, ende))
 
                 cursor.executemany('INSERT INTO zeitslot(wochentag, startzeit, endzeit) VALUES (%s, %s, %s)', slots)
-            print('===> Tabelle "person_zeitslot" wurde befüllt')
+            print('===> Tabelle "zeitslot" wurde befüllt')
 
 
 except psycopg.DatabaseError as e:
