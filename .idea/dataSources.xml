@@ -36,5 +36,12 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/prg_fitness_app</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="tk_click@localhost" uuid="a9ad5e9e-6f96-4494-96f2-2288ddd9af06">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/tk_click</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
