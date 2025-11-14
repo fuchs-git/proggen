@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox
 import psycopg
-import base64
 
 DB = dict(
     dbname="prg_fitness_app",
@@ -10,6 +9,7 @@ DB = dict(
     host="localhost",
     port="5432"
 )
+
 
 def save_person_to_db(name: str, age: int, image_path: str) -> int:
     """Speichert Person in person und Bild (als BYTEA) in bilder. Gibt person.id zurück."""
@@ -28,12 +28,12 @@ def save_person_to_db(name: str, age: int, image_path: str) -> int:
                     bild = f.read()
                     cur.execute('INSERT INTO bilder (person, bild) VALUES (%s,%b)', (person_id, bild))
 
-
             conn.commit()
             return person_id
         except Exception:
             conn.rollback()
             raise
+
 
 fenster = tk.Tk()
 fenster.geometry('750x500')
@@ -45,16 +45,19 @@ bg_label.place(x=0, y=0, relwidth=1, relheight=1)
 bg_label.lower()
 _bg_ref = None
 
+
 def set_background(path: str):
     global _bg_ref
     _bg_ref = tk.PhotoImage(file=path).subsample(2, 2)
     bg_label.config(image=_bg_ref)
+
 
 def clear_content():
     for w in fenster.winfo_children():
         if w is bg_label:
             continue
         w.destroy()
+
 
 # ---------- HOME (deine Ausrichtung unverändert) ----------
 def show_home():
@@ -67,34 +70,36 @@ def show_home():
     btn = tk.Button(fenster, text='Login')
     btn.grid(row=1, column=1, padx=0, pady=200)
 
-    tk.Button(fenster, text='Registrieren', command=create_person)\
-      .grid(row=2, column=0, columnspan=2, pady=(10, 0))
+    tk.Button(fenster, text='Registrieren', command=create_person) \
+        .grid(row=2, column=0, columnspan=2, pady=(10, 0))
+
 
 # ---------- REGISTRIEREN (ohne Pillow) ----------
 PREVIEW_W, PREVIEW_H = 200, 140  # Zielbox in Pixeln
+
 
 def create_person():
     clear_content()
     set_background('src/bg2.png')
 
     fenster.name_var = tk.StringVar()
-    fenster.age_var  = tk.StringVar()
+    fenster.age_var = tk.StringVar()
     fenster.selected_image_path = None
-    fenster.preview_img_ref = None      # skaliertes Bild
-    fenster.preview_img_orig = None     # Original-PhotoImage
+    fenster.preview_img_ref = None  # skaliertes Bild
+    fenster.preview_img_orig = None  # Original-PhotoImage
 
     tk.Label(fenster, text='Person anlegen').grid(row=0, column=0, columnspan=3, pady=(20, 12))
 
     tk.Label(fenster, text='Name:').grid(row=1, column=0, sticky='e', padx=(20, 8), pady=4)
-    tk.Entry(fenster, width=24, textvariable=fenster.name_var)\
+    tk.Entry(fenster, width=24, textvariable=fenster.name_var) \
         .grid(row=1, column=1, sticky='w', padx=(0, 20), pady=4)
 
     tk.Label(fenster, text='Alter:').grid(row=2, column=0, sticky='e', padx=(20, 8), pady=4)
-    tk.Entry(fenster, width=24, textvariable=fenster.age_var)\
+    tk.Entry(fenster, width=24, textvariable=fenster.age_var) \
         .grid(row=2, column=1, sticky='w', padx=(0, 20), pady=4)
 
     tk.Label(fenster, text='Bild:').grid(row=3, column=0, sticky='e', padx=(20, 8), pady=4)
-    tk.Button(fenster, text='Bild wählen…', command=pick_image_no_pillow)\
+    tk.Button(fenster, text='Bild wählen…', command=pick_image_no_pillow) \
         .grid(row=3, column=1, sticky='w', padx=(0, 20), pady=4)
 
     # Vorschau-Box in Pixeln (grauer Rahmen, bleibt kompakt)
@@ -106,6 +111,7 @@ def create_person():
 
     tk.Button(fenster, text='Zurück', command=show_home).grid(row=5, column=0, pady=(16, 0))
     tk.Button(fenster, text='Speichern', command=validate_form).grid(row=5, column=1, pady=(16, 0))
+
 
 def pick_image_no_pillow():
     path = filedialog.askopenfilename(
@@ -139,6 +145,7 @@ def pick_image_no_pillow():
     except Exception as e:
         messagebox.showerror("Fehler", f"Bild konnte nicht geladen werden:\n{e}")
 
+
 def validate_form():
     name = fenster.name_var.get().strip()
     age_s = fenster.age_var.get().strip()
@@ -167,9 +174,12 @@ def validate_form():
         show_home()  # zurück zur Startansicht (optional)
     except Exception as e:
         messagebox.showerror("Fehler beim Speichern", str(e))
+
+
 # Start
 show_home()
 fenster.mainloop()
+
 
 def debug_db(cur):
     cur.execute("SELECT current_database(), current_schema(), current_setting('search_path');")
@@ -177,6 +187,7 @@ def debug_db(cur):
 
     cur.execute("SELECT to_regclass('public.bilder');")
     print("public.bilder =", cur.fetchone()[0])  # None = Tabelle wird nicht gefunden
+
 
 with psycopg.connect(**DB, autocommit=False) as conn:
     with conn.cursor() as cur:
