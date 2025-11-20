@@ -3,6 +3,7 @@ from datetime import datetime
 
 import psycopg
 from psycopg import DatabaseError
+from schiffstypen import schiffstypen
 
 
 class Datenpunkt:
@@ -37,6 +38,12 @@ class Schiff:
     def __str__(self):
         return f"{self.name} ({self.mmsi}) [{self.typ}]"
 
+    def __eq__(self, other:"Schiff"):
+        return self.mmsi == other.mmsi
+
+    def __hash__(self):
+        return hash(self.mmsi)
+
     def datenpunkt_hinzufuegen(self, zeit: datetime, lat:float, lon:float):
 
         self.datenpunkte.add(Datenpunkt(zeit, lat, lon))
@@ -55,32 +62,39 @@ class Schiff:
         return self.name < other.name
 
 
+class CSV:
+    def __init__(self, dateiname: str):
+        self.dateiname = dateiname
+        self.datei_lesen()
 
-schiffstypen = {0: 'Reserved',1: 'Reserved', 2: 'Reserved', 3: 'Reserved', 4: 'Reserved', 5: 'Reserved', 6: 'Reserved', 7: 'Reserved',
-                8: 'Reserved', 9: 'Reserved', 10: 'Reserved', 11: 'Reserved', 12: 'Reserved', 13: 'Reserved',
-                14: 'Reserved', 15: 'Reserved', 16: 'Reserved', 17: 'Reserved', 18: 'Reserved', 19: 'Reserved',
-                20: 'Wing in ground (WIG)', 21: '(WIG), Hazardous cat A', 22: '(WIG), Hazardous cat B',
-                23: '(WIG), Hazardous cat C', 24: '(WIG), Hazardous cat D', 25: '(WIG), Reserved',
-                26: '(WIG), Reserved', 27: '(WIG), Reserved', 28: '(WIG), Reserved', 29: '(WIG), Reserved',
-                30: 'Fishing', 31: 'Towing', 32: 'Towing: length exceeds 200m or breadth exceeds 25m',
-                33: 'Dredging or underwater ops', 34: 'Diving ops', 35: 'Military ops', 36: 'Sailing',
-                37: 'Pleasure Craft', 38: 'Reserved', 39: 'Reserved', 40: 'High speed craft (HSC)',
-                41: '(HSC), Hazardous cat A', 42: '(HSC), Hazardous cat B', 43: '(HSC), Hazardous cat C',
-                44: '(HSC), Hazardous cat D', 45: '(HSC), Reserved', 46: '(HSC), Reserved', 47: '(HSC), Reserved',
-                48: '(HSC), Reserved', 49: '(HSC), No additional information', 50: 'Pilot Vessel',
-                51: 'Search and Rescue vessel', 52: 'Tug', 53: 'Port Tender', 54: 'Anti-pollution equipment',
-                55: 'Law Enforcement', 56: 'Spare - Local Vessel', 57: 'Spare - Local Vessel', 58: 'Medical Transport',
-                59: 'Noncombatant ship according to RR Resolution No. 18', 60: 'Passenger',
-                61: 'Passenger, Hazardous cat A', 62: 'Passenger, Hazardous cat B',
-                63: 'Passenger, Hazardous cat C', 64: 'Passenger, Hazardous cat D', 65: 'Passenger, Reserved',
-                66: 'Passenger, Reserved', 67: 'Passenger, Reserved', 68: 'Passenger, Reserved',
-                69: 'Passenger, No additional information', 70: 'Cargo', 71: 'Cargo, Hazardous cat A',
-                72: 'Cargo, Hazardous cat B', 73: 'Cargo, Hazardous cat C', 74: 'Cargo, Hazardous cat D',
-                75: 'Cargo, Reserved', 76: 'Cargo, Reserved', 77: 'Cargo, Reserved', 78: 'Cargo, Reserved',
-                79: 'Cargo, No additional information', 80: 'Tanker', 81: 'Tanker, Hazardous cat A',
-                82: 'Tanker, Hazardous cat B', 83: 'Tanker, Hazardous cat C',
-                84: 'Tanker, Hazardous cat D', 85: 'Tanker, Reserved', 86: 'Tanker, Reserved',
-                87: 'Tanker, Reserved', 88: 'Tanker, Reserved', 89: 'Tanker, No additional information', 90: 'Other',
-                91: 'Other, Hazardous cat A', 92: 'Other, Hazardous cat B', 93: 'Other, Hazardous cat C',
-                94: 'Other, Hazardous cat D', 95: 'Other, Reserved', 96: 'Other, Reserved',
-                97: 'Other Type, Reserved', 98: 'Other, Reserved', 99: 'Other, no additional information}'}
+    def datei_lesen(self):
+        schiffe = {}
+        try:
+            with open(self.dateiname) as file:
+                print(file.readline())  # erste Zeile weglassen (Header)
+
+                vessel = set()
+
+                for zeile in file:
+
+                    # MM, Time, LAT, LON, S, C, H, Name, I, C, Typ, S, Length, Width,Draft,Cargo,TransceiverClass
+                    mmsi, zeit, lat, lon, _, _, _, name, _, _, typ, *_ = zeile.split(",")
+
+                    vessel.add(Schiff(mmsi,name,typ))
+
+
+                    if mmsi not in schiffe:
+                        # Es gibt Zeilen in denen der Typ kaputt ist
+                        typ = int(typ) if typ else 99
+                        schiffe[mmsi] = Schiff(mmsi, name, schiffstypen[typ])
+                    schiffe[mmsi].datenpunkt_hinzufuegen(datetime.strptime(zeit, "%Y-%m-%dT%H:%M:%S"), float(lat),
+                                                         float(lon))
+        except FileNotFoundError:
+            print(f"Datei {self.dateiname} nicht gefunden")
+        except OSError:
+            print(f"Fehler beim Lesen der Datei {self.dateiname}")
+        print(schiffe)
+
+
+
+csv = CSV("AIS_2024_05_29_newyork.csv")
