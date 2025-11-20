@@ -2,17 +2,20 @@ import tkinter as tk
 import tk_db
 
 
+def setup():
+    db.createDB()
+    db.createTbl()
+
+
 def addieren():
-    anzahl.set(db.read() +1)
-    wert =int(anzahl.get())
+    anzahl.set(db.read() + 1)
+    wert = int(anzahl.get())
     db.speichern(wert)
 
+
 db = tk_db.Datenbank()
-# db.createDB()
-# db.createTbl()
-
-
 fenster = tk.Tk()
+fenster.geometry('180x80')
 
 anzahl = tk.IntVar(value=db.read())
 lbl = tk.Label(textvariable=anzahl)
