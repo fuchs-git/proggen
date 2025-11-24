@@ -1,8 +1,8 @@
 import math
 from datetime import datetime
+import datenbank as db
 
-import psycopg
-from psycopg import DatabaseError
+
 from schiffstypen import schiffstypen
 
 
@@ -65,36 +65,40 @@ class Schiff:
 class CSV:
     def __init__(self, dateiname: str):
         self.dateiname = dateiname
-        self.datei_lesen()
+        self.schiffe = set()
+        self.datenpunkte = set()
+        self._datei_lesen()
 
-    def datei_lesen(self):
+    def _datei_lesen(self):
         schiffe = {}
         try:
             with open(self.dateiname) as file:
                 print(file.readline())  # erste Zeile weglassen (Header)
-
-                vessel = set()
 
                 for zeile in file:
 
                     # MM, Time, LAT, LON, S, C, H, Name, I, C, Typ, S, Length, Width,Draft,Cargo,TransceiverClass
                     mmsi, zeit, lat, lon, _, _, _, name, _, _, typ, *_ = zeile.split(",")
 
-                    vessel.add(Schiff(mmsi,name,typ))
+                    # Dict Möglichkeit
+                    # if mmsi not in vessel:
+                    #     vessel[mmsi] = Schiff(mmsi,name,int(typ) if typ else 99)
+                    #
+                    # vessel[mmsi].datenpunkt_hinzufuegen(datetime.strptime(zeit, "%Y-%m-%dT%H:%M:%S"), float(lat), float(lon))
+
+                    self.schiffe.add((mmsi,name,int(typ) if typ else 99))
+                    self.datenpunkte.add((datetime.strptime(zeit, "%Y-%m-%dT%H:%M:%S"), float(lat), float(lon)))
 
 
-                    if mmsi not in schiffe:
-                        # Es gibt Zeilen in denen der Typ kaputt ist
-                        typ = int(typ) if typ else 99
-                        schiffe[mmsi] = Schiff(mmsi, name, schiffstypen[typ])
-                    schiffe[mmsi].datenpunkt_hinzufuegen(datetime.strptime(zeit, "%Y-%m-%dT%H:%M:%S"), float(lat),
-                                                         float(lon))
         except FileNotFoundError:
             print(f"Datei {self.dateiname} nicht gefunden")
         except OSError:
             print(f"Fehler beim Lesen der Datei {self.dateiname}")
-        print(schiffe)
+
 
 
 
 csv = CSV("AIS_2024_05_29_newyork.csv")
+ais_db = db.Datenbank('password')
+ais_db.erstelle_db()
+ais_db.befuellen(csv.schiffe, csv.datenpunkte)
