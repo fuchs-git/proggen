@@ -1,24 +1,27 @@
 import tkinter as tk
 import os
 import math
+import datenmodell
 
-CHARACTERS = [
-    {
-        "Name": "Geralt of Rivia",
-        "Species": "Witcher",
-        "Gender": "Male",
-        "Age_Group": "Adult",
-        "Origin_or_Region": "Kaer Morhen / Rivia",
-        "Affiliation": "Wolf School",
-        "Role_or_Occupation": "Monster slayer",
-        "Notable_Traits": "stoic, moral code",
-        "Abilities_or_Skills": "Signs, swordsmanship",
-        "First_Appearance": "The Last Wish",
-        "Strength": 85, "Health": 90, "Mana": 40, "Level": 70,
-        "Image": "bilder/1.png",  # PNG/GIF wird von tk.PhotoImage unterstützt
-    },
+CHARACTERS = datenmodell.witcherDB.lesen()
+#CHARACTERS = [
+#   {
+#       "Name": "Geralt of Rivia",
+#       "Species": "Witcher",
+#       "Gender": "Male",
+#       "Age_Group": "Adult",
+#       "Origin_or_Region": "Kaer Morhen / Rivia",
+#       "Affiliation": "Wolf School",
+#       "Role_or_Occupation": "Monster slayer",
+#       "Notable_Traits": "stoic, moral code",
+#       "Abilities_or_Skills": "Signs, swordsmanship",
+#       "First_Appearance": "The Last Wish",
+#       "Strength": 85, "Health": 90, "Mana": 40, "Level": 70,
+#       "Image": "bilder/1.png",  # PNG/GIF wird von tk.PhotoImage unterstützt
+#   },
+
     # weitere Charaktere hier ...
-]
+#]
 
 class WitcherApp(tk.Tk):
     def __init__(self):
