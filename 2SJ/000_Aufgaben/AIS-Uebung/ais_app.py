@@ -1,5 +1,6 @@
 import tkinter as tk
 from datetime import datetime
+import datenmodell
 
 from datenmodell import schiffstypen, Schiff
 
@@ -41,7 +42,8 @@ def lat_lon_nach_x_y(lat: float, lon: float) -> tuple:
 ################################################################################
 
 # Schiffsdaten einlesen
-schiffe = {}
+db = datenmodell.Datenbank('password')
+schiffe = db.schiffe()
 dateiname_daten = "AIS_2024_05_29_newyork.csv"
 try:
     with open(dateiname_daten) as file:

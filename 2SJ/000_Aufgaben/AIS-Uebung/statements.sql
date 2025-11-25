@@ -26,8 +26,7 @@ VALUES (?, ?, ?);
 INSERT INTO aisdata (mmsi, basedatetime, lat, lon)
 VALUES (?, ?, ?, ?); -- Zum Testen
 
-SELECT mmsi, name, typ
-FROM vessel;
+SELECT mmsi, name, typ FROM vessel;
 
 -- SELECT basedatetime, lat, lon
 -- FROM vessel

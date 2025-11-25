@@ -1,0 +1,11 @@
+Name,Species,Gender,Age_Group,Origin_or_Region,Affiliation,Role_or_Occupation,Notable_Traits,Abilities_or_Skills,First_Appearance,Strength,Health,Mana,Level
+Geralt of Rivia,Witcher,Male,Adult,"Kaer Morhen / Rivia",Wolf School,Monster slayer,"stoic moral code","Signs swordsmanship","The Last Wish",85,90,40,70
+Yennefer of Vengerberg,Human (sorceress),Female,Adult,"Vengerberg",Brotherhood of Sorcerers,Mage,"proud sharp-tongued","high magic","The Last Wish",20,60,95,88
+Cirilla (Ciri),Human (Elder Blood),Female,Young Adult,"Cintra",Wolf School,Princess/witcher-in-training,headstrong compassionate,"Elder Blood powers","Blood of Elves",60,75,80,65
+Jaskier (Dandelion),Human,Male,Adult,"Redania",None,Bard,talkative loyal,music persuasion,"The Last Wish",10,55,20,30
+Triss Merigold,Human (sorceress),Female,Adult,"Maribor",Lodge of Sorceresses,Mage/healer,"idealistic","elemental magic","The Last Wish",25,65,90,72
+Vesemir,Witcher,Male,Elderly,"Kaer Morhen",Wolf School,Mentor,"pragmatic",training swordsmanship,"Blood of Elves",70,80,30,68
+Eskel,Witcher,Male,Adult,"Kaer Morhen",Wolf School,Witcher,quiet kind,Signs tracking,"Blood of Elves",78,85,35,67
+Lambert,Witcher,Male,Adult,"Kaer Morhen",Wolf School,Witcher,"sarcastic",combat Signs,"Blood of Elves",75,82,33,66
+Emhyr var Emreis,Human,Male,Adult,"Nilfgaard",Nilfgaard,Emperor,"ruthless","strategy","Time of Contempt",40,70,10,55
+Cahir,Human,Male,Adult,"Nilfgaard",Nilfgaard,Knight,"conflicted","swordsmanship","Time of Contempt",65,78,5,50
