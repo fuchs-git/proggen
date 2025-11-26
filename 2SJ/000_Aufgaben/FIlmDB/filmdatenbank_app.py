@@ -4,13 +4,12 @@ from filmDatabase import filme
 
 def filmauswahl(event:tk.Event):
     auswahl =lbox.get(lbox.curselection())
-
     for film, name, vorname, bj in filme.regisseur():
-        if str(auswahl) == film:
+        if auswahl == film:
             regisseurlabel.configure(text=f'{vorname} {name} ({bj})')
 
     for _, name, jahr, monat in filme.filme():
-        if str(auswahl) == name:
+        if auswahl == name:
             filmlabel.configure(text=name)
             erscheinungsjahrlabel.configure(text=jahr)
             darsteller = []
