@@ -36,22 +36,16 @@ def lat_lon_nach_x_y(lat: float, lon: float) -> tuple:
     return (int(1458.23 * (lon + 74.191)),
             int(1934.36 * (40.855 - lat)))
 
-
-################################################################################
-# TODO auf Datenbank umbauen
-# Dieser Teil hier muss auf DB umgebaut werden
-################################################################################
-
 # Schiffsdaten einlesen
 
 dateiname_daten = "AIS_2024_05_29_newyork.csv"
 
 ais_db = datenmodell.Datenbank('password', setup=False)
-# schiffe = ais_db.csv_einlesen(dateiname_daten)
+#schiffe = ais_db.csv_einlesen(dateiname_daten)
 schiffe = ais_db.schiffe()
 
 
-# GUI
+# ----------- GUI -----------
 fenster = tk.Tk()
 # das genaue Layout soll so sein:
 # unten ein Label mit der Beschreibung des gewählten Schiffs

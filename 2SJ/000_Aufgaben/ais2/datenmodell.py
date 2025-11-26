@@ -133,8 +133,7 @@ class Datenbank:
                         schiff_set.add((mmsi, name, schiffstypen[typ]))
 
                         # ----------------------------------------------------------------------------
-                    schiffe[mmsi].datenpunkt_hinzufuegen(datetime.strptime(zeit, "%Y-%m-%dT%H:%M:%S"), float(lat),
-                                                         float(lon))
+
                     datenpunkt_set.add((mmsi, datetime.strptime(zeit, "%Y-%m-%dT%H:%M:%S"), float(lat),
                                         float(lon)))
         except FileNotFoundError:
@@ -210,3 +209,10 @@ schiffstypen = {0: 'Reserved', 1: 'Reserved', 2: 'Reserved', 3: 'Reserved', 4: '
                 91: 'Other, Hazardous cat A', 92: 'Other, Hazardous cat B', 93: 'Other, Hazardous cat C',
                 94: 'Other, Hazardous cat D', 95: 'Other, Reserved', 96: 'Other, Reserved',
                 97: 'Other Type, Reserved', 98: 'Other, Reserved', 99: 'Other, no additional information}'}
+
+
+if __name__ == '__main__':
+    dateiname_daten = "AIS_2024_05_29_newyork.csv"
+
+    ais_db = Datenbank('password', setup=True)
+    schiffe = ais_db.csv_einlesen(dateiname_daten)
