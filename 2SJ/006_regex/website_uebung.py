@@ -49,4 +49,4 @@ print(treffer)
 if treffer:
     print("getroffen")
 else:
-    print("nicht getroffen")
+    print(f"nicht getroffen")
