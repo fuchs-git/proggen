@@ -22,14 +22,15 @@ pattern3 = pattern1 + r'.*?<span class="ticker__tag">(Sicherheit|sicherheit)</sp
 treffer = re.findall(pattern3, data, re.DOTALL)
 print(len(treffer))
 
-pattern4 = r'.*?<a class="ticker__link" href="([^/news/].*?)">.*?</a>'
+pattern4 = r'<a class="ticker__link" href="([^/news/][^"]*)">[^<]*</a>'
 treffer = re.findall(pattern4, data, re.DOTALL)
 print(treffer)
 
-pattern5 = (r'<article class="ticker__item" data-id="([a-z]{0,1}[0-9]{8})">.*?'
-            r'<span class="ticker__tag">(Sicherheit)</span>.*?'
-            r'<time class="ticker__time" datetime="(.*?)">(?:.*?)</time>.*?'
-            r'<span class="ticker__title">([^<]*?)</span>'
-            r'.*?<a class="ticker__link" href="([^/news/].*?)">.*?</a>')
-treffer = re.findall(pattern5, data, re.DOTALL)
-print(treffer)
+pattern5 = (r'<article class="ticker__item" data-id="([a-z]{0,1}[0-9]{8})">\s*'
+            r'<time class="ticker__time" datetime="([^"]*)">(?:[^<]*)</time>\s*'
+            r'<span class="ticker__tag">(Sicherheit)</span>\s*'
+            r'<span class="ticker__title">([^<]*)</span>.*?'
+            r'<a class="ticker__link" href="([^"]*)">[^<]*</a>'
+            )
+treffer = re.finditer(pattern5, data, re.DOTALL)
+[print(f'{x.group(1)} {x.group(2)} {x.group(3)} {x.group(4)}') for x in treffer]
