@@ -33,4 +33,15 @@ pattern5 = (r'<article class="ticker__item" data-id="([a-z]{0,1}[0-9]{8})">\s*'
             r'<a class="ticker__link" href="([^"]*)">[^<]*</a>'
             )
 treffer = re.finditer(pattern5, data, re.DOTALL)
-[print(f'{x.group(1)} {x.group(2)} {x.group(3)} {x.group(4)}') for x in treffer]
+# [print(f'{x.group(1)} {x.group(2)} {x.group(3)} {x.group(4)}') for x in treffer]
+
+
+pattern5 = (r'<article class="ticker__item" data-id="(?P<ID>[a-z]{0,1}[0-9]{8})">\s*'
+            r'<time class="ticker__time" datetime="(?P<Datum>[^"]*)">(?:[^<]*)</time>\s*'
+            r'<span class="ticker__tag">(?P<TAG>Sicherheit)</span>\s*'
+            r'<span class="ticker__title">(?P<Titel>[^<]*)</span>.*?'
+            r'<a class="ticker__link" href="(?P<Link>[^"]*)">[^<]*</a>'
+            )
+treffer = re.finditer(pattern5, data, re.DOTALL)
+[print(f'{x.group("ID")} {x.group("Datum")} {x.group("TAG")} {x.group("Titel")} {x.group("Link")}') for x in treffer]
+
