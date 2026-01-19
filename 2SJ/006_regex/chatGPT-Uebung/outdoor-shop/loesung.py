@@ -55,6 +55,16 @@ for id, name, beschreibung, y, preis in treffer:
     #print(id, name, beschreibung, y, float(preis))
     produkt_liste.append(Produkt(id,name,beschreibung,y,round(float(preis),2)))
 
-for produkt in sorted(produkt_liste, reverse=True):
-    print(produkt)
+#for produkt in sorted(produkt_liste, reverse=True):
+#    print(produkt)
+
+print('------------------------------------')
+# <span class="plp-price-module__description">Tarp, reißfest, 25x33 cm</span>
+pattern = r'<span class="(plp-price-module__description)">([^<]+)</span>'
+treffer = re.finditer(pattern, datei)
+
+for t in treffer:
+    anfang, ende = t.span(2)
+    print(t.group(2), ende-anfang)
+
 
