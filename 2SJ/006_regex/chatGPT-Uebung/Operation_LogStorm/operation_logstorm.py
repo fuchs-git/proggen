@@ -19,7 +19,6 @@ pattern = r'^.*?Failed password for ([a-zA-Z_.]*) from ([\d\.]*) port ([0-9]*) (
 treffer = re.findall(pattern, auth_log, flags=re.MULTILINE)
 
 ip_list = {}
-
 for user, ip, port, service in treffer:
     ip_list[ip] = ip_list.get(ip, 0) +1
 
