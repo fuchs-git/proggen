@@ -31,3 +31,4 @@ tag.set_nummer(-54)
 print(tag.als_wort())
 
 print("Anzahl Lesezugriffe auf _nummer:", tag.get_lesezugriffe())
+
