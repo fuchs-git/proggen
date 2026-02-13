@@ -11,8 +11,10 @@ class Stift:
 
 
 class RoterStift(Stift):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, material, *args, **kwargs):
         Stift.__init__(self, *args, **kwargs)
+
+
         self.farbe = 'rot'
 
 s = Stift('Bambus')
