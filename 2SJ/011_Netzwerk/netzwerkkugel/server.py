@@ -13,7 +13,6 @@ def funktion():
         nachricht += client.recv(12).decode('utf-8')
         print(nachricht)
         if ' ' in nachricht:
-
             geteilt = nachricht.split(',',maxsplit=1)
             if len(geteilt) == 2:
                 koord, nachricht = geteilt
@@ -23,14 +22,7 @@ def funktion():
             kugel.place(x=x, y=y)
 
 
-
-
-
-
-
 threading.Thread(target=funktion).start()
-
-
 
 fenster = tk.Tk()
 fenster.title('Netzwerk Kugel - Server')
@@ -43,7 +35,5 @@ bild_g = tk.PhotoImage(file='Bild2.png')
 kugel = tk.Label(fenster, image=bild_r)
 
 # fenster.bind("<B1-Motion>", bewegen)
-
-
 
 fenster.mainloop()
